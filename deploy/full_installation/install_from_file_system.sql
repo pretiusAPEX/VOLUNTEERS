@@ -48,3 +48,10 @@ Prompt -----------------------
 
 @@../../database/packages/NOTYFIKACJE_PKG.pks;
 @@../../database/packages/NOTYFIKACJE_PKG.pkb;
+
+
+Prompt -----------------------
+Prompt DDL
+Prompt -----------------------
+
+@@../../database/ddl/settings.sql;

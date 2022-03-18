@@ -343,3 +343,7 @@ create or replace package body NOTYFIKACJE_PKG as
      
   end NOTYFIKACJE_PKG;
 /
+
+
+insert into SETTINGS (CODE,VALUE,NAME) values ('VOLUNTEERS_LIMIT','40','Limit wolontariuszy w slocie');
+insert into SETTINGS (CODE,VALUE,NAME) values ('DAYS_FORWARD','7','Pokaż dni w przód na raporcie zgłoszeń');

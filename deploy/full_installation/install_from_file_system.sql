@@ -51,7 +51,8 @@ Prompt -----------------------
 
 
 Prompt -----------------------
-Prompt DDL
+Prompt DML
 Prompt -----------------------
 
-@@../../database/ddl/settings.sql;
+@@../../database/dml/settings.sql;
+@@../../database/dml/time_slots.sql;

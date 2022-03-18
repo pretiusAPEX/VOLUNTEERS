@@ -347,3 +347,13 @@ create or replace package body NOTYFIKACJE_PKG as
 
 insert into SETTINGS (CODE,VALUE,NAME) values ('VOLUNTEERS_LIMIT','40','Limit wolontariuszy w slocie');
 insert into SETTINGS (CODE,VALUE,NAME) values ('DAYS_FORWARD','7','Pokaż dni w przód na raporcie zgłoszeń');
+
+
+insert into TIME_SLOTS (THE_ORDER,NAME,TYPE,HOUR_START,HOUR_END) values (1,'23:00 - 2:00','HOUR',23,2);
+insert into TIME_SLOTS (THE_ORDER,NAME,TYPE,HOUR_START,HOUR_END) values (2,'02:00 - 5:00','HOUR',2,5);
+insert into TIME_SLOTS (THE_ORDER,NAME,TYPE,HOUR_START,HOUR_END) values (3,'5:00 - 8:00','HOUR',5,8);
+insert into TIME_SLOTS (THE_ORDER,NAME,TYPE,HOUR_START,HOUR_END) values (4,'8:00 - 11:00','HOUR',8,11);
+insert into TIME_SLOTS (THE_ORDER,NAME,TYPE,HOUR_START,HOUR_END) values (5,'11:00 - 14:00','HOUR',11,14);
+insert into TIME_SLOTS (THE_ORDER,NAME,TYPE,HOUR_START,HOUR_END) values (6,'14:00 - 17:00','HOUR',14,17);
+insert into TIME_SLOTS (THE_ORDER,NAME,TYPE,HOUR_START,HOUR_END) values (7,'17:00 - 20:00','HOUR',17,20);
+insert into TIME_SLOTS (THE_ORDER,NAME,TYPE,HOUR_START,HOUR_END) values (8,'20:00 - 23:00','HOUR',20,23);

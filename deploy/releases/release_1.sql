@@ -1,0 +1,1 @@
+@@../full_installation/install_from_file_system.sql;

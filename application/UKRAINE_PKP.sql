@@ -28,13 +28,13 @@ prompt APPLICATION 121537 - Ukraine PKP - DEV
 -- Application Export:
 --   Application:     121537
 --   Name:            Ukraine PKP - DEV
---   Date and Time:   21:37 Friday March 18, 2022
---   Exported By:     KKOSIOREK
+--   Date and Time:   18:58 Wednesday March 23, 2022
+--   Exported By:     SBAJOR
 --   Flashback:       0
 --   Export Type:     Application Export
 --     Pages:                     12
---       Items:                   26
---       Computations:             3
+--       Items:                   27
+--       Computations:             4
 --       Validations:             16
 --       Processes:               14
 --       Regions:                 27
@@ -68,7 +68,7 @@ prompt APPLICATION 121537 - Ukraine PKP - DEV
 --       Reports:
 --       E-Mail:
 --         Templates:              1
---     Supporting Objects:  Excluded
+--     Supporting Objects:  Included
 --   Version:         21.2.5
 --   Instance ID:     63113759365424
 --
@@ -107,7 +107,7 @@ wwv_flow_api.create_flow(
 ,p_public_user=>'APEX_PUBLIC_USER'
 ,p_proxy_server=>nvl(wwv_flow_application_install.get_proxy,'')
 ,p_no_proxy_domains=>nvl(wwv_flow_application_install.get_no_proxy_domains,'')
-,p_flow_version=>unistr('Pretius Low-code Sp. z o.o. | Release 1.5 | Je\017Celi potrzebujesz podobnej aplikacji do dzia\0142ania Twojej organizacji wspieraj\0105cej pomoc Uchod\017Acom, zg\0142o\015B si\0119 na pstaniszewski@pretius.com')
+,p_flow_version=>unistr('Pretius Low-code Sp. z o.o. | Release 1.6 | Je\017Celi potrzebujesz podobnej aplikacji do dzia\0142ania Twojej organizacji wspieraj\0105cej pomoc Uchod\017Acom, zg\0142o\015B si\0119 na pstaniszewski@pretius.com')
 ,p_flow_status=>'AVAILABLE_W_EDIT_LINK'
 ,p_flow_unavailable_text=>wwv_flow_string.join(wwv_flow_t_varchar2(
 '<div style="text-align: center;">',
@@ -126,8 +126,8 @@ wwv_flow_api.create_flow(
 ,p_auto_time_zone=>'N'
 ,p_substitution_string_01=>'APP_NAME'
 ,p_substitution_value_01=>'Ukraine PKP'
-,p_last_updated_by=>'PSTANISZEWSKI@PRETIUS.COM'
-,p_last_upd_yyyymmddhh24miss=>'20220318212717'
+,p_last_updated_by=>'SBAJOR'
+,p_last_upd_yyyymmddhh24miss=>'20220323175459'
 ,p_file_prefix => nvl(wwv_flow_application_install.get_static_app_file_prefix,'')
 ,p_files_version=>5
 ,p_ui_type_name => null
@@ -14984,6 +14984,8 @@ unistr('<b>J\0119zyki</b>: #LANGUAGES#'),
 '<br>',
 '<b>Uwagi:</b> #COMMENTS#',
 '<br><br>',
+unistr('Zanim przyjdziesz na PKP zapoznaj si\0119 z <a href="#GUIDE_LINK#">przewodnikiem dla Wolontariusza</a>'),
+'<br><br>',
 unistr('Je\015Bli chcesz zrezygnowa\0107 z wolontariatu kliknij w poni\017Cszy link, a Twoje zg\0142oszenie zostanie anulowane:'),
 unistr('<a href="#CANCEL_LINK#">Wypisz si\0119 z dy\017Curu</a>'),
 '<br><br>',
@@ -15934,8 +15936,8 @@ wwv_flow_api.create_page(
 ,p_page_template_options=>'#DEFAULT#'
 ,p_page_is_public_y_n=>'Y'
 ,p_protection_level=>'C'
-,p_last_updated_by=>'KRYBICKI'
-,p_last_upd_yyyymmddhh24miss=>'20220317172317'
+,p_last_updated_by=>'SBAJOR'
+,p_last_upd_yyyymmddhh24miss=>'20220323175459'
 );
 wwv_flow_api.create_page_plug(
  p_id=>wwv_flow_api.id(89120175970057268227)
@@ -15979,6 +15981,7 @@ wwv_flow_api.create_page_plug(
 ,p_plug_display_condition_type=>'FUNCTION_BODY'
 ,p_plug_display_when_condition=>'return not apex_authentication.is_public_user;'
 ,p_plug_display_when_cond2=>'PLSQL'
+,p_plug_footer=>unistr('<b>Jako Administrator mo\017Cesz dopisywa\0107 Wolontariuszy na trwaj\0105ce lub przesz\0142e dy\017Cury</b>')
 ,p_attribute_01=>'N'
 ,p_attribute_02=>'HTML'
 );
@@ -16195,6 +16198,14 @@ wwv_flow_api.create_page_item(
 ,p_attribute_05=>'BOTH'
 );
 wwv_flow_api.create_page_item(
+ p_id=>wwv_flow_api.id(44376587430152266424)
+,p_name=>'P3_IS_PUBLIC_USER'
+,p_item_sequence=>180
+,p_item_plug_id=>wwv_flow_api.id(89120175970057268227)
+,p_display_as=>'NATIVE_HIDDEN'
+,p_attribute_01=>'N'
+);
+wwv_flow_api.create_page_item(
  p_id=>wwv_flow_api.id(44940046482578988001)
 ,p_name=>'P3_IS_RODO_ACCEPTED'
 ,p_item_sequence=>20
@@ -16279,7 +16290,7 @@ wwv_flow_api.create_page_item(
 '',
 ' ((:P3_ID is null and current_date <=  case when ts.HOUR_END < ts.HOUR_START then trunc(to_date(:P3_THE_DATE)- 1,''DD'') +  ts.HOUR_START/24 else trunc(to_date(:P3_THE_DATE),''DD'') +  ts.HOUR_START/24 end )',
 ' or (:P3_ID is not null))',
-'',
+' or :P3_IS_PUBLIC_USER = 0',
 'order by THE_ORDER'))
 ,p_lov_display_null=>'YES'
 ,p_lov_null_text=>'Wybierz'
@@ -16461,9 +16472,16 @@ wwv_flow_api.create_page_computation(
 ,p_computation_language=>'PLSQL'
 ,p_computation=>wwv_flow_string.join(wwv_flow_t_varchar2(
 'declare',
-'    v_min_date date default current_date;',
+'    v_min_date date;',
 '    v_vol_date date;',
 'begin',
+'    if APEX_AUTHENTICATION.IS_PUBLIC_USER',
+'    then ',
+'      v_min_date := current_date;',
+'    else',
+'      v_min_date := to_date(''01-03-2022'', ''DD-MM-YYYY'');',
+'    end if;',
+'',
 '    if :P3_ID is not null then',
 '        select THE_DATE',
 '        into v_vol_date',
@@ -16476,6 +16494,28 @@ wwv_flow_api.create_page_computation(
 '    end if;',
 '',
 '    return v_min_date;',
+'end;'))
+);
+wwv_flow_api.create_page_computation(
+ p_id=>wwv_flow_api.id(44376587503297266425)
+,p_computation_sequence=>20
+,p_computation_item=>'P3_IS_PUBLIC_USER'
+,p_computation_point=>'BEFORE_BOX_BODY'
+,p_computation_type=>'FUNCTION_BODY'
+,p_computation_language=>'PLSQL'
+,p_computation=>wwv_flow_string.join(wwv_flow_t_varchar2(
+'declare',
+'  v_public_user number;',
+'begin',
+'',
+'  if APEX_AUTHENTICATION.IS_PUBLIC_USER ',
+'  then ',
+'    v_public_user := 1; ',
+'  else ',
+'    v_public_user := 0;',
+'  end if;',
+'',
+'  return v_public_user;',
 'end;'))
 );
 wwv_flow_api.create_page_validation(
@@ -16806,6 +16846,9 @@ wwv_flow_api.create_page_process(
 ,p_error_display_location=>'INLINE_IN_NOTIFICATION'
 ,p_process_when_button_id=>wwv_flow_api.id(89120184538451268233)
 );
+end;
+/
+begin
 wwv_flow_api.create_page_process(
  p_id=>wwv_flow_api.id(89120185643984268234)
 ,p_process_sequence=>30
@@ -19653,6 +19696,23 @@ wwv_flow_api.create_page_process(
 ':P9999_REMEMBER := case when :P9999_USERNAME is not null then ''Y'' end;'))
 ,p_process_clob_language=>'PLSQL'
 );
+end;
+/
+prompt --application/deployment/definition
+begin
+wwv_flow_api.create_install(
+ p_id=>wwv_flow_api.id(49154471995672312589)
+);
+end;
+/
+prompt --application/deployment/checks
+begin
+null;
+end;
+/
+prompt --application/deployment/buildoptions
+begin
+null;
 end;
 /
 prompt --application/end_environment

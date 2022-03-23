@@ -46,6 +46,8 @@ Prompt -----------------------
 Prompt Packages
 Prompt -----------------------
 
+@@../../database/packages/SETTINGS_PKG.pks;
+@@../../database/packages/SETTINGS_PKG.pkb;
 @@../../database/packages/NOTYFIKACJE_PKG.pks;
 @@../../database/packages/NOTYFIKACJE_PKG.pkb;
 

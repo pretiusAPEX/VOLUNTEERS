@@ -105,6 +105,7 @@ create or replace package body NOTYFIKACJE_PKG as
         '   ,"LANGUAGES":'    || apex_json.stringify( v_languages) ||
         '   ,"SUPPORT_TYPE":' || apex_json.stringify( v_support_type ) ||
         '   ,"COMMENTS":'     || apex_json.stringify( v_volunteers_row.COMMENTS ) ||
+        '   ,"GUIDE_LINK":'   || apex_json.stringify( SETTINGS_PKG.f_get_settings_row('GUIDE_LINK').VALUE ) ||
         '   ,"CANCEL_LINK":'  || apex_json.stringify( v_cancel_link ) ||
         '}',
         p_application_id => v('APP_ID'));
